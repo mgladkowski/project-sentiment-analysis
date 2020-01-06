@@ -5,23 +5,33 @@
         <meta charset="utf-8">
         <meta name="viewport"  content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="site.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
         <script>
          "use strict";
          function submitForm(oFormElement) {
+
              var xhr = new XMLHttpRequest();
              xhr.onload = function() {
+
                  var result = parseFloat(xhr.responseText);
                  var resultElement = document.getElementById('result');
-                 if (result == 0) {
+
+                 // show degree of sentiment gradient
+                 if (result < 0.4) {
                      resultElement.className = 'bg-danger';
-                     resultElement.innerHTML = 'Your review was NEGATIVE!';
+                     resultElement.innerHTML = 'Your review was negative!';
+                 } else if (result >= 0.4 && result <= 0.6) {
+                     resultElement.className = 'bg-warning';
+                     resultElement.innerHTML = 'Your review was fairly neutral.';
                  } else {
                      resultElement.className = 'bg-success';
-                     resultElement.innerHTML = 'Your review was POSITIVE!';
+                     resultElement.innerHTML = 'Your review was positive!';
                  }
+                 // indicator
+                 $('.gradient').show();
+                 $('.indicator').css('left', parseInt(result*100)+'%')
              }
              xhr.open (oFormElement.method, oFormElement.action, true);
              var review = document.getElementById('review');
@@ -34,18 +44,29 @@
     <body>
 
         <div class="container">
+
             <h1>Is your review positive, or negative?</h1>
             <p>Enter your review below and click submit to find out...</p>
+
             <form method="POST"
-                  action="**REPLACE WITH PUBLIC API URL**"
-                  onsubmit="return submitForm(this);" >                     <!-- HERE IS WHERE YOU NEED TO ENTER THE API URL -->
+                  action="https://e9nrfu3wt4.execute-api.us-east-1.amazonaws.com/prod"
+                  onsubmit="return submitForm(this);" >
                 <div class="form-group">
                     <label for="review">Review:</label>
-                    <textarea class="form-control"  rows="5" id="review">Please write your review here.</textarea>
+                    <textarea class="form-control" rows="5" id="review">Please write your review here.</textarea>
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
-            <h1 class="bg-success" id="result"></h1>
+
+            <h2 class="bg-success" id="result"></h2>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class='gradient' style="display:none;">
+                      <div class='indicator'></div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </body>
 </html>

@@ -1,0 +1,22 @@
+/* Sentiment intensity indicator */
+/* Thanks to https://www.cssmatic.com/gradient-generator for the gradient */
+.gradient {
+  width: 100%;
+  height: 30px;
+  background: rgba(255,0,0,1);
+  background: -moz-linear-gradient(left, rgba(255,0,0,0.5) 0%, rgba(255,255,0,0.5) 50%, rgba(0,255,0,0.5) 100%);
+  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,0,0,0.5)), color-stop(50%, rgba(255,255,0,0.5)), color-stop(100%, rgba(0,255,0,0.5)));
+  background: -webkit-linear-gradient(left, rgba(255,0,0,0.5) 0%, rgba(255,255,0,0.5) 50%, rgba(0,255,0,0.5) 100%);
+  background: -o-linear-gradient(left, rgba(255,0,0,0.5) 0%, rgba(255,255,0,0.5) 50%, rgba(0,255,0,0.5) 100%);
+  background: -ms-linear-gradient(left, rgba(255,0,0,0.5) 0%, rgba(255,255,0,0.5) 50%, rgba(0,255,0,0.5) 100%);
+  background: linear-gradient(to right, rgba(255,0,0,0.5) 0%, rgba(255,255,0,0.5) 50%, rgba(0,255,0,0.5) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0000', endColorstr='#00ff00', GradientType=1 );
+}
+.indicator {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  content: '&nbsp';
+  border-left: solid 3px black;
+}
